@@ -64,7 +64,7 @@
 		if (age === 0) {
 			saludo = `Bienvenido!!!, ha nacido ${name} y tiene ${age || 0} años`;
 		}
-	}
+	};
 	$: taskList = tareas;
 	const starWars = () => {
 		return new Promise(async(resolve, reject) => {
@@ -79,7 +79,11 @@
 				}
 			}, 3 * 1000); // Simulando una pequeña pausa
 		})
-	}
+	};
+	const clickMethod = (evt) => {
+		console.log(evt, evt.detail);
+	};
+	import PsButton from './components/button.svelte';
 </script>
 
 <main>
@@ -165,9 +169,32 @@
 		 	{ /await }
 		</div>
 	</div>
+	<div class="card">
+		<h1>COMPONENTES</h1>
+		<div class="components">
+			<PsButton text="Click" />
+			<PsButton text="Click" type="error" />
+			<PsButton text="Click" type="warning" />
+			<PsButton text="Click" type="info" />
+			<PsButton text="Click" type="default" />
+			<PsButton text="Click" type="error" disabled={true} />
+			<PsButton text="Evento" type="default" on:click-evt={clickMethod} />
+			<PsButton>
+				<span class="btn-special">Slot botón 0</span>
+			</PsButton>
+			<PsButton>
+				<span class="btn-special">Slot botón 1</span>
+				<span slot="info-text" class="btn-special">Texto info</span>
+			</PsButton>
+		</div>
+	</div>
 </main>
 
 <style>
+ .btn-special {
+	 color: #000000;
+	 font-size: 10px;
+ }
 	main {
 		text-align: center;
 		padding: 1em;
@@ -256,6 +283,19 @@
 			height: 72px;
 			opacity: 0;
 		}
+	}
+
+	.components {
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: row;
+		justify-content: start;
+		align-items: auto;
+		align-content: start
+	}
+	.item {
+ 	 flex: 0 0 auto;
+	  margin: 10px;
 	}
 
 </style>

@@ -179,7 +179,10 @@
 			<PsButton text="Click" type="default" />
 			<PsButton text="Click" type="error" disabled={true} />
 			<PsButton text="Evento" type="default" on:click-evt={clickMethod} />
-			<PsButton>
+			<PsButton let:status={data}>
+			{#if data}
+				mouseover inside SLOT
+			{/if}
 				<span class="btn-special">Slot botón 0</span>
 			</PsButton>
 			<PsButton>

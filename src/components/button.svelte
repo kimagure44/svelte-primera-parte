@@ -29,10 +29,18 @@
   onDestroy(() => {
 		console.log('5 - Destroy');
   });
+  
+  let status = false;
+  const enter = () => { 
+    status = true;
+  };
+  const exit = () => {
+    status = false;
+  };
 </script>
 
-<button class="btn {type} {isDisbled}" on:click={clickFn}>
-  <slot>{text}</slot>
+<button class="btn {type} {isDisbled}" on:click={clickFn} on:mouseenter={enter} on:mouseleave={exit}>
+  <slot status={status}>{text}</slot>
   <slot name="info-text">Texto defecto</slot>
 </button>
 

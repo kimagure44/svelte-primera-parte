@@ -3,10 +3,11 @@
   export let text = '';
   export let type = 'default';
   export let disabled = false;
+  export let page = '';
   $: isDisbled = disabled ? 'disable' : '';
   const dispatch = createEventDispatcher();
   const clickFn = () => {
-    dispatch('click-evt', { msn: 'inside'});
+    dispatch('click-evt', { msn: 'inside', page });
   };
 
   // Ciclo de vida
@@ -39,7 +40,7 @@
   };
 </script>
 
-<button class="btn {type} {isDisbled}" on:click={clickFn} on:mouseenter={enter} on:mouseleave={exit}>
+<button class="btn {type} {isDisbled}" on:click={clickFn} on:mouseenter={enter} on:mouseleave={exit} {page}>
   <slot status={status}>{text}</slot>
   <slot name="info-text">Texto defecto</slot>
 </button>

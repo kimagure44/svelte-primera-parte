@@ -83,7 +83,15 @@
 	const clickMethod = (evt) => {
 		console.log(evt, evt.detail);
 	};
+
+	const goPage = (evt) => {
+		const page = evt.detail.page;
+		push(`/${page}`)
+	};
 	import PsButton from './components/button.svelte';
+	import Router from 'svelte-spa-router';
+	import { link, push } from 'svelte-spa-router';
+	import routes from './routes';
 </script>
 
 <main>
@@ -191,6 +199,50 @@
 			</PsButton>
 		</div>
 	</div>
+	<div class="card">
+		<h1>SVELTE ROUTER</h1>
+		<div class="menu">
+			<hr>
+			<ul>
+				<li><a href="/op1/param1/param2" use:link>Opción 1</a></li>
+				<li><a href="/op2" use:link>Opción 2</a></li>
+				<li><a href="/op3" use:link>Opción 3</a></li>
+				<li><a href="/op4" use:link>Opción 4</a></li>
+				<li><a href="/op5" use:link>Opción 5</a></li>
+			</ul>
+			<hr>
+			<ul>
+				<li>
+					<PsButton text="Opción 1" type="default" on:click-evt={goPage} page="op1">
+						<span slot="info-text" class="btn-special" />
+					</PsButton>
+				</li>
+				<li>
+					<PsButton text="Opción 2" type="default" on:click-evt={goPage} page="op2">
+						<span slot="info-text" class="btn-special" />
+					</PsButton>
+				</li>
+				<li>
+					<PsButton text="Opción 3" type="default" on:click-evt={goPage} page="op3">
+						<span slot="info-text" class="btn-special" />
+					</PsButton>
+				</li>
+				<li>
+					<PsButton text="Opción 4" type="default" on:click-evt={goPage} page="op4">
+						<span slot="info-text" class="btn-special" />
+					</PsButton>
+				</li>
+				<li>
+					<PsButton text="Opción 5" type="default" on:click-evt={goPage} page="op5">
+						<span slot="info-text" class="btn-special" />
+					</PsButton>
+				</li>
+			</ul>
+		</div>
+		<hr>
+		<Router routes="{routes}" />
+		<hr>
+	</div>
 </main>
 
 <style>
@@ -296,9 +348,22 @@
 		align-items: auto;
 		align-content: start
 	}
-	.item {
- 	 flex: 0 0 auto;
-	  margin: 10px;
+	.menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+		display: flex;
 	}
-
+	.menu ul li{
+    width: 25%;
+    text-align: center;
+		cursor: pointer;
+		transition: 300ms ease-in-out;
+		margin: 5px;
+		padding: 5px;
+	}
+	a {
+		text-decoration: none;
+	}
 </style>

@@ -87,11 +87,17 @@
 	const goPage = (evt) => {
 		const page = evt.detail.page;
 		push(`/${page}`)
-	};
+  };
+
+  const suma = value => dataStore.set(value + 1);
+  const resta = value => dataStore.set(value - 1);
+  
 	import PsButton from './components/button.svelte';
 	import Router from 'svelte-spa-router';
 	import { link, push } from 'svelte-spa-router';
-	import routes from './routes';
+  import routes from './routes';
+  import { dataStore, personalData, customStore, getTime, getRealTime } from './store';
+  import PsChangeStore from './components/changeStore.svelte';
 </script>
 
 <main>
@@ -242,6 +248,23 @@
 		<hr>
 		<Router routes="{routes}" />
 		<hr>
+	</div>
+  <div class="card">
+		<h1>STORE</h1>
+    <hr>
+		Svelte store principal { $dataStore }
+    <button on:click={() => suma($dataStore)}>Suma 1 Set</button>
+    <button on:click={() => resta($dataStore)}>Resta 1 Set</button>
+    <hr>
+    <PsChangeStore />
+    {JSON.stringify($personalData)}
+    <hr>
+    Método en el store (Store personalizado)
+    <button on:click={() => customStore.suma($dataStore)}>Suma custom store Update</button>
+    <button on:click={() => customStore.resta($dataStore)}>Resta custom store Update</button>
+    <hr>
+    Método <b>readable</b> para obtener la fecha y la hora: {$getTime}<br>
+    Método <b>readable</b> para obtener la fecha y la hora en tiempo real: {$getRealTime}<br>
 	</div>
 </main>
 
